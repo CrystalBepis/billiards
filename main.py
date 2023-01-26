@@ -41,47 +41,47 @@ def produce_boundary_points(init_point: planar.Vec2, init_angle: float, num_poin
 	return points_x, points_y
 
 def main():
-	# rho0 = 1.0/5.0 - 2.0**(1.0/2.0)/20.0
-	# rho1 = 1.0/5.0 + 2.0**(1.0/2.0)/20.0
+	rho0 = 1.0/5.0 # - 2.0**(1.0/2.0)/20.0
+	rho1 = 2.0/5.0 # + 2.0**(1.0/2.0)/20.0
 
-	# phi0 = 2 * np.pi * rho0
-	# phi1 = 2 * np.pi * rho1
+	phi0 = 2 * np.pi * rho0
+	phi1 = 2 * np.pi * rho1
 
-	# R0 = float(np.sqrt(2.0 / (1 + np.cos(phi0))))
-	# R1 = float(np.sqrt(2.0 / (1 + np.cos(phi1))))
+	R0 = float(np.sqrt(2.0 / (1 + np.cos(phi0))))
+	R1 = float(np.sqrt(2.0 / (1 + np.cos(phi1))))
 
 	# print(R0, R1)
 
-	# arc1 = shapes.arc(planar.Vec2(0, 0), R0, planar.Vec2(-1, 0), np.pi)
-	# arc2 = shapes.arc(planar.Vec2(0, 0), R1, planar.Vec2(1, 0), np.pi)
-	# line_seg1 = shapes.line_seg(planar.Vec2(0, R0), planar.Vec2(0, R1))
-	# line_seg2 = shapes.line_seg(planar.Vec2(0, -R1), planar.Vec2(0, -R0))
-	# # circle1 = shapes.circle(planar.Vec2(0, 0), 2.0)
-	# # ellipse1 = shapes.ellipse(planar.Vec2(-1.5, 0), planar.Vec2(1.5, 0), 4.0)
+	arc1 = shapes.arc(planar.Vec2(0, 0), R0, planar.Vec2(-1, 0), np.pi)
+	arc2 = shapes.arc(planar.Vec2(0, 0), R1, planar.Vec2(1, 0), np.pi)
+	line_seg1 = shapes.line_seg(planar.Vec2(0, R0), planar.Vec2(0, R1))
+	line_seg2 = shapes.line_seg(planar.Vec2(0, -R1), planar.Vec2(0, -R0))
+	# circle1 = shapes.circle(planar.Vec2(0, 0), 2.0)
+	# ellipse1 = shapes.ellipse(planar.Vec2(-1.5, 0), planar.Vec2(1.5, 0), 4.0)
 
 	# # arc1 = shapes.arc(planar.Vec2(0, 0), 2.0, planar.Vec2(1, 1), np.pi / 2.0)
 	# # arc2 = shapes.arc(planar.Vec2(0, 0), 1.0, planar.Vec2(-1, 1), np.pi / 2.0)
 	# # line_seg1 = shapes.line_seg(planar.Vec2(0, 1), planar.Vec2(0, 2))
 	# # line_seg2 = shapes.line_seg(planar.Vec2(-1, 0), planar.Vec2(2, 0))
 
-	# temp_angle = 0*np.pi / 4
+	temp_angle = 0*np.pi / 4
 
-	# init_point = shapes.rot_vec(planar.Vec2(-R0, 0), temp_angle)
-	# init_angle = (np.pi / 2.0 - phi0 / 2.0) + temp_angle
+	init_point = shapes.rot_vec(planar.Vec2(-R0, 0), temp_angle)
+	init_angle = (np.pi / 2.0 - phi0 / 2.0) + temp_angle
 
 	# init_point = shapes.rot_vec(planar.Vec2(R1, 0), temp_angle)
 	# init_angle = np.pi - (np.pi / 2.0 - phi1 / 2.0) + temp_angle
 
-	# object_list1 = [arc1, arc2, line_seg1, line_seg2]
+	object_list1 = [arc1, arc2, line_seg1, line_seg2]
 
-	alpha0 = 1.0 / 5.0 * np.pi
+	# alpha0 = 1 / 5.0 * np.pi
 
-	init_point = planar.Vec2(-1, 0)
+	# init_point = planar.Vec2(-1, 0)
 
-	object_list1 = [shapes.circle(planar.Vec2(0, 0), 1.0)]
-	init_angle = np.pi / 2.0 - alpha0
+	# object_list1 = [shapes.circle(planar.Vec2(0, 0), 1.0)]
+	# init_angle = np.pi / 2.0 - alpha0
 
-	points_x, points_y = produce_boundary_points(init_point, init_angle, 6, object_list1)
+	points_x, points_y = produce_boundary_points(init_point, init_angle, 60, object_list1)
 	
 	fig = plt.figure(dpi=240)
 	ax = fig.gca()
@@ -115,11 +115,11 @@ def main():
 	for object in runner1.objects:
 		ax.plot(*object.get_plot_data(100), 'r', linewidth=0.5)
 	
-	T = np.linspace(0, 2*np.pi, 100)
-	U = np.cos(T) * 1.0 * np.cos(alpha0)
-	V = np.sin(T) * 1.0 * np.cos(alpha0)
+	# T = np.linspace(0, 2*np.pi, 100)
+	# U = np.cos(T) * 1.0 * np.cos(alpha0)
+	# V = np.sin(T) * 1.0 * np.cos(alpha0)
 
-	ax.plot(U, V, 'g', linewidth=0.5)
+	# ax.plot(U, V, 'g', linewidth=0.5)
 
 	ax.plot(points_x, points_y, 'b', linewidth=0.5)
 	ax.plot([points_x[0]], [points_y[0]], 'go', markersize=5)
